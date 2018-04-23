@@ -86,7 +86,7 @@ class UserController extends Controller
         return view('backend.user.edit',compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update($id,Request $request, User $user)
     {
         $rules = [
             'fullname' => 'required',
@@ -97,7 +97,6 @@ class UserController extends Controller
             'email.email' => 'Email không hợp lệ',
             'fullname.required' => 'Họ tên không được để trống',
         ];
-
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails())
             return redirect()->back()->withErrors($validator);
@@ -107,6 +106,8 @@ class UserController extends Controller
             return redirect()->back()->with('error','Mật khẩu bỏ trống nếu không muốn thay đổi hoặc nhập ít nhất 6 kí tự nếu muốn đổi mới');
 
         $redirectTo = 'admin/user';
+
+        $user=User::find($id);
         if(!empty($request->get('profile')))
         {
             $user = Auth::user();
@@ -121,7 +122,7 @@ class UserController extends Controller
         }
 
         $email = $request->get('email');
-        if(User::where('email',$email)->exists() && $email != $user->email)
+        if(User::where('email',$email)->where('id',"!=",$id)->exists() && $email != $user->email)
             return redirect()->back()->with('error','Email này đã tồn tại trong hệ thống');
 
         if(!empty($pass))
