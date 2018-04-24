@@ -33,14 +33,20 @@
                                         <label>Tiêu đề</label>
                                         <input type="text" class="form-control" name="title_vi" value="{{$isEdit ? $gallery->title_vi : old("title_vi")}}">
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>Giới thiệu</label>
+                                        <textarea class="form-control editors" name="description_vi" id="description_vi">{{$isEdit ? $gallery->description_vi : old("description_vi")}}</textarea>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="english">
                                     <div class="form-group">
                                         <label>Title</label>
                                         <input type="text" class="form-control" name="title_en" value="{{$isEdit ? $gallery->title_en : old("title_en")}}">
                                     </div>
-
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control editors" name="description_en" id="description_en">{{$isEdit ? $gallery->description_en : old("description_en")}}</textarea>
+                                    </div>
                                 </div>
                             </div>
                             @if($isEdit)
@@ -116,5 +122,11 @@
             $('#arrImage').val(t+id+',');
 
         }
+        $('.editors').each( function () {
+            CKEDITOR.replace(this.id, {
+                filebrowserUploadUrl: '/uploader/service',
+                filebrowserBrowseUrl:'{{URL::asset('')}}folder/service'
+            });
+        });
     </script>
 @endsection

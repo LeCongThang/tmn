@@ -20,22 +20,26 @@
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="col-md-8">
-                            <div class="form-group">
-                                <label>Đường dẫn</label>
-                                <input type="text" class="form-control" name="link" value="{{$isEdit ? $slider->link : old("link")}}">
+
+                            <div class="nav-tabs-custom">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#vietnam" data-toggle="tab">Tiếng Viêt</a></li>
+                                    <li><a href="#english" data-toggle="tab">English</a></li>
+                                </ul>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Hình ảnh (360px x 260px)</label>
-                                <img id="imgSmall" src="{{$isEdit ? asset('images/slider/'.$slider->image) : asset('img/default.png')}}" class="img-responsive"  alt="Slide Image">
-                                <div class="input-group image-preview" style="margin-top: 10px">
-                                    <input placeholder="" id="text-image" type="text" value="{{$isEdit? $slider->image:''}}" class="form-control image-preview-filename" disabled="disabled">
-                                    <!-- don't give a name === doesn't send on POST/GET -->
-                                    <span class="input-group-btn">
-                                            <div class="btn btn-success image-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Browse</span>
-                                                <input type="file" accept="image/png, image/jpeg, image/gif" name="image" onchange="readURL(this);"/>
-                                                <!-- rename it -->
-                                            </div>
-                                    </span>
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="vietnam">
+
+                                    <div class="form-group">
+                                        <label>Giới thiệu</label>
+                                        <textarea class="form-control editors" name="description_vi" id="description_vi">{{$isEdit ? $slider->description_vi : old("description_vi")}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="english">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea class="form-control editors" name="description_en" id="description_en">{{$isEdit ? $slider->description_en : old("description_en")}}</textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +61,24 @@
 
                                 </select>
                             </div>
-
+                            <div class="form-group">
+                                <label>Đường dẫn</label>
+                                <input type="text" class="form-control" name="link" value="{{$isEdit ? $slider->link : old("link")}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Hình ảnh (900 x 500px)</label>
+                                <img id="imgSmall" src="{{$isEdit ? asset('images/slider/'.$slider->image) : asset('img/default.png')}}" class="img-responsive"  alt="Slide Image">
+                                <div class="input-group image-preview" style="margin-top: 10px">
+                                    <input placeholder="" id="text-image" type="text" value="{{$isEdit? $slider->image:''}}" class="form-control image-preview-filename" disabled="disabled">
+                                    <!-- don't give a name === doesn't send on POST/GET -->
+                                    <span class="input-group-btn">
+                                            <div class="btn btn-success image-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Browse</span>
+                                                <input type="file" accept="image/png, image/jpeg, image/gif" name="image" onchange="readURL(this);"/>
+                                                <!-- rename it -->
+                                            </div>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -83,5 +104,11 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        $('.editors').each( function () {
+            CKEDITOR.replace(this.id, {
+                filebrowserUploadUrl: '/uploader/service',
+                filebrowserBrowseUrl:'{{URL::asset('')}}folder/service'
+            });
+        });
     </script>
 @endsection

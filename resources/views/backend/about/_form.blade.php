@@ -60,21 +60,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Hình ảnh nhỏ (200px x 150px)</label>
-                                <img id="imgSmall" src="{{$isEdit ? asset('images/about/'.$about->image_small) : asset('img/default.png')}}" class="img-responsive"  alt="Slide Image">
-                                <div class="input-group image-preview" style="margin-top: 10px">
-                                    <input placeholder="" id="text-image1" type="text" value="{{$isEdit? $about->image_small:''}}" class="form-control image-preview-filename" disabled="disabled">
-                                    <!-- don't give a name === doesn't send on POST/GET -->
-                                    <span class="input-group-btn">
-                                            <div class="btn btn-success image-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> <span class="image-preview-input-title">Browse</span>
-                                                <input type="file" accept="image/png, image/jpeg, image/gif" name="image_small" onchange="readURL(this);"/>
-                                                <!-- rename it -->
-                                            </div>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Hình ảnh lớn (600px x 400px)</label>
+                                <label for="exampleInputPassword1">Hình ảnh (600px x 400px)</label>
                                 <img id="imgBig" src="{{$isEdit ? asset('images/about/'.$about->image_big) : asset('img/default.png')}}" class="img-responsive"  alt="Slide Image">
                                 <div class="input-group image-preview" style="margin-top: 10px">
                                     <input placeholder="" id="text-image2" type="text" value="{{$isEdit? $about->image_big:''}}" class="form-control image-preview-filename" disabled="disabled">

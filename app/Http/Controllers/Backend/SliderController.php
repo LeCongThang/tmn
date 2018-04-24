@@ -38,10 +38,16 @@ class SliderController extends Controller
                 return redirect()->back()->with('error','Vui lòng không để trống link')->withInput();
             if (empty($request->hasFile('image')))
                 return redirect()->back()->with('error','Vui lòng không để trống hình ảnh')->withInput();
+            if (empty($request->get('description_vi')))
+                return redirect()->back()->with('error','Vui lòng không để trống giới thiệu tiếng việt')->withInput();
+            if (empty($request->get('description_en')))
+                return redirect()->back()->with('error','Vui lòng không để trống giới thiệu tiếng anh')->withInput();
             $slider=new Slider();
             $slider->sort_order=$request->sort_order;
             $slider->link=$request->link;
             $slider->status=$request->status;
+            $slider->description_vi=$request->description_vi;
+            $slider->description_en=$request->description_en;
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -86,6 +92,10 @@ class SliderController extends Controller
                 return redirect()->back()->with('error','Vui lòng không để trống thứ tự hiển thị')->withInput();
             if (empty($request->get('link')))
                 return redirect()->back()->with('error','Vui lòng không để trống link')->withInput();
+            if (empty($request->get('description_vi')))
+                return redirect()->back()->with('error','Vui lòng không để trống giới thiệu tiếng việt')->withInput();
+            if (empty($request->get('description_en')))
+                return redirect()->back()->with('error','Vui lòng không để trống giới thiệu tiếng anh')->withInput();
             $slider=Slider::find($id);
             if($slider){
                 $image_old=$slider->image;
@@ -101,6 +111,8 @@ class SliderController extends Controller
                 $slider->sort_order=$request->sort_order;
                 $slider->link=$request->link;
                 $slider->status=$request->status;
+                $slider->description_vi=$request->description_vi;
+                $slider->description_en=$request->description_en;
                 if($slider->save()){
                     if($flag==1){
                         if(File::exists(public_path('images/slider/'.$image_old))) {

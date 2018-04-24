@@ -46,6 +46,10 @@ class GalleryController extends Controller
                 return redirect()->back()->with('error','Vui lòng không để trống tiêu đề tiếng việt')->withInput();
             if (empty($request->get('title_en')))
                 return redirect()->back()->with('error','Vui lòng không để trống tiêu đề tiếng anh')->withInput();
+            if (empty($request->get('description_vi')))
+                return redirect()->back()->with('error','Vui lòng không để trống giới thiệu tiếng việt')->withInput();
+            if (empty($request->get('description_en')))
+                return redirect()->back()->with('error','Vui lòng không để trống giới thiệu tiếng anh')->withInput();
             if (empty($request->hasFile('image')))
                 return redirect()->back()->with('error','Vui lòng không để trống hình ảnh')->withInput();
 
@@ -54,6 +58,8 @@ class GalleryController extends Controller
 //
             $gallery->title_vi=$request->title_vi;
             $gallery->title_en=$request->title_en;
+            $gallery->description_vi=$request->description_vi;
+            $gallery->description_en=$request->description_en;
             $gallery->status=$request->status;
 
             $result=DB::transaction(function() use ($gallery, $request,$arr_image){
@@ -112,6 +118,10 @@ class GalleryController extends Controller
                 return redirect()->back()->with('error','Vui lòng không để trống tiêu đề tiếng việt')->withInput();
             if (empty($request->get('title_en')))
                 return redirect()->back()->with('error','Vui lòng không để trống tiêu đề tiếng anh')->withInput();
+            if (empty($request->get('description_vi')))
+                return redirect()->back()->with('error','Vui lòng không để trống giới thiệu tiếng việt')->withInput();
+            if (empty($request->get('description_en')))
+                return redirect()->back()->with('error','Vui lòng không để trống giới thiệu tiếng anh')->withInput();
             if ($request->hasFile('image')){
                 if (count($request->file('image'))>5)
                     return redirect()->back()->with('error','Số lượng hình tối đa là 5')->withInput();
@@ -121,6 +131,8 @@ class GalleryController extends Controller
                 $arr_image=array();
                 $gallery->title_vi=$request->title_vi;
                 $gallery->title_en=$request->title_en;
+                $gallery->description_vi=$request->description_vi;
+                $gallery->description_en=$request->description_en;
                 $gallery->status=$request->status;
                 $result=DB::transaction(function() use ($gallery, $request,$arr_image,$arr_image_insert){
                     if (!empty($request->get('arrImage'))){

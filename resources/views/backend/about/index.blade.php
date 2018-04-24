@@ -38,8 +38,7 @@
                                     <thead>
                                     <tr>
                                         <th width="5%">#</th>
-                                        <th>Hình ảnh nhỏ</th>
-                                        <th>Hình ảnh lớn</th>
+                                        <th>Hình ảnh</th>
                                         <th>Nội dung</th>
                                         <th width="100px"></th>
                                     </tr>
@@ -48,8 +47,6 @@
                                     @foreach($about as $item)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-
-                                            <td><img src="{{asset('images/about')}}/{{$item->image_small}}" style="width: 100px"></td>
                                             <td><img src="{{asset('images/about')}}/{{$item->image_big}}" style="width: 150px"></td>
                                             <td>{!!  $item->short_des_vi!!}</td>
                                             <td>
@@ -67,8 +64,7 @@
                                         <thead>
                                         <tr>
                                             <th width="5%">#</th>
-                                            <th>Hình ảnh nhỏ</th>
-                                            <th>Hình ảnh lớn</th>
+                                            <th>Image</th>
                                             <th>Description</th>
                                             <th width="100px"></th>
                                         </tr>
@@ -77,7 +73,6 @@
                                         @foreach($about as $item)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                <td><img src="{{asset('images/about')}}/{{$item->image_small}}" style="width: 100px"></td>
                                                 <td><img src="{{asset('images/about')}}/{{$item->image_big}}" style="width: 150px"></td>
                                                 <td>{!! $item->short_des_en !!}</td>
                                                 <td>
